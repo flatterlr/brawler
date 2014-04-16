@@ -259,7 +259,7 @@ checkCollisions:function(dt) {
 				{
 					if(player.pos[0] > enemy.pos[0])
 					{
-						//console.log('Player hit enemy ' + i + ' from the right'); 
+						//console.log('Player hit enemy ' + i + ' from the right with Power: ' +player.power); 
 						enemy.hit(-1,player.power); 
 					}
 					else
@@ -544,14 +544,22 @@ insertHighScore:function(score){
 },
 //adds to the game's difficulty over time (and gives player more power to launch enemies)
 enhanceDifficulty:function(){
-	app.brawler.enemyHealth ++;
-	app.brawler.fingerCooldown -= 1;
-	if(app.brawler.fingerCooldown <= 0){ app.brawler.fingerCooldown = 0; }
-	app.brawler.playerPower += 50;
+	if(app.brawler.enemyHealth < 10)
+	{
+		app.brawler.enemyHealth ++;
+	}
+	if(app.brawler.fingerCooldown > 0)
+	{ 
+		app.brawler.fingerCooldown -= 1;
+	}
+	if(app.brawler.player.power < 350)
+	{
+		app.brawler.player.power += 20;
+	}
 	
 	//console.log("New fingerCooldown: " + app.brawler.fingerCooldown); 
 	//console.log("New enemyHealth: " + app.brawler.enemyHealth); 
-	//console.log("New playerPower: " + app.brawler.playerPower); 
+	//console.log("New playerPower: " + app.brawler.player.power); 
 },
 
 
